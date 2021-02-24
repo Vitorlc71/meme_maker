@@ -54,9 +54,8 @@ function App() {
                 boxes: boxes.map(text => ({ text }))
             })
 
-            const resp = await fetch(`https://api.imgflip.com/caption_image?${params}`)
-            const json = await resp.json()
-            const { data: { url } } = json
+            const resp =  await (await fetch(`https://api.imgflip.com/caption_image?${params}`)).json()
+            const { data: { url } } = resp
             setSelectedImage(url)
 
         } catch (error) {
