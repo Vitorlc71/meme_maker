@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { Body, Button, Form, Templates, Header, Input } from '../styledComponents/styles';
-import qs from 'qs'
 import image from '../assets/emoji.png'
-import 'dotenv/config'
 
 interface IMeme {
     id: string,
     name: string,
     url?: string,
 }
+
+const baseUrl = 'http://localhost:3333'
 
 function App() {
 
@@ -23,8 +23,9 @@ function App() {
     useEffect(() => {
         (async () => {
             try {
-                const resp = await (await fetch(`https://api.imgflip.com/get_memes`)).json()
-                setMeme(resp.data.memes)
+                const resp = await fetch(baseUrl)
+                const json = await resp.json()
+                setMeme(json)
 
             } catch (error) {
                 console.log(error)
@@ -47,16 +48,24 @@ function App() {
     const handleSubmit = async (e: any) => {
         e.preventDefault()
         try {
-            const params = qs.stringify({
-                template_id: id,
-                username: process.env.REACT_APP_USERNAME,
-                password: process.env.REACT_APP_PASSWORD,
-                boxes: boxes.map(text => ({ text }))
-            })
+            if (!memeName) {
+                alert('Escolha uma imagem!')
+            } else {
+                const params = {
+                    template_id: id,
+                    boxes: boxes.map(text => ({ text }))
+                }
 
-            const resp =  await (await fetch(`https://api.imgflip.com/caption_image?${params}`)).json()
-            const { data: { url } } = resp
-            setSelectedImage(url)
+                const resp = await fetch(`${baseUrl}/getmemes`, {
+                    method: 'POST',
+                    body: JSON.stringify(params),
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                })
+                const json = await resp.json()
+                setSelectedImage(json.data.url)
+            }
 
         } catch (error) {
             console.log(error)
@@ -115,7 +124,7 @@ function App() {
                                     textAlign: 'center'
                                 }}>Textos
                                 <div style={{
-                                    fontSize: '0.7em'
+                                        fontSize: '0.7em'
                                     }}>{memeName}</div>
                                 </div>
                                 {!boxCount && (
