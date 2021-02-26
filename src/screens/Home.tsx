@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { Body, Button, Form, Templates, Header, Input } from '../styledComponents/styles';
 import image from '../assets/emoji.png'
+import env from 'dotenv'
+
+env.config()
 
 interface IMeme {
     id: string,
     name: string,
     url?: string,
 }
-
-const baseUrl = 'http://localhost:3333'
 
 function App() {
 
@@ -23,7 +24,7 @@ function App() {
     useEffect(() => {
         (async () => {
             try {
-                const resp = await fetch(baseUrl)
+                const resp = await fetch(`${process.env.REACT_APP_URL}`)
                 const json = await resp.json()
                 setMeme(json)
 
@@ -55,13 +56,10 @@ function App() {
                     template_id: id,
                     boxes: boxes.map(text => ({ text }))
                 }
-
-                const resp = await fetch(`${baseUrl}/getmemes`, {
+                
+                const resp = await fetch(`${process.env.REACT_APP_URL}`, {
                     method: 'POST',
                     body: JSON.stringify(params),
-                    headers: {
-                        'Content-Type': 'application/json'
-                    }
                 })
                 const json = await resp.json()
                 setSelectedImage(json.data.url)
