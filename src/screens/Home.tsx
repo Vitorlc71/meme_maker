@@ -26,9 +26,8 @@ function App() {
     useEffect(() => {
         (async () => {
             try {
-                const resp = await fetch(`${REACT_APP_URL}`)
-                const json = await resp.json()
-                setMeme(json)
+                const resp = await axios.get(`${REACT_APP_URL}`)
+                setMeme(resp.data)
 
             } catch (error) {
                 console.log(error)
