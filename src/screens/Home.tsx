@@ -33,7 +33,7 @@ function App() {
                 console.log(error)
             }
         })()
-    }, [])
+    }, [REACT_APP_URL])
 
     const handleClickImage = (image: any) => {
         setBoxCount(image.box_count)
