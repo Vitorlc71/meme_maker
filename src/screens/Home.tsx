@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Body, Button, Form, Templates, Header, Input } from '../styledComponents/styles';
 import image from '../assets/emoji.png'
 import env from 'dotenv'
+import axios from 'axios'
 
 env.config()
 
@@ -15,16 +16,17 @@ function App() {
 
     const [meme, setMeme] = useState<IMeme[]>([])
     const [boxCount, setBoxCount] = useState<number>(0)
-    const [boxes, setBoxes] = useState<IMeme[]>([])
+    const [boxes, setBoxes] = useState<Array<string>>([])
     const [id, setId] = useState<number>()
     const [selectedImage, setSelectedImage] = useState<string>()
     const [memeName, setMemeName] = useState<string>()
 
+    const { REACT_APP_URL, REACT_APP_USER, REACT_APP_PASSWORD } = process.env
 
     useEffect(() => {
         (async () => {
             try {
-                const resp = await fetch(`${process.env.REACT_APP_URL}`)
+                const resp = await fetch(`${REACT_APP_URL}`)
                 const json = await resp.json()
                 setMeme(json)
 
@@ -32,7 +34,7 @@ function App() {
                 console.log(error)
             }
         })()
-    }, [])
+    })
 
     const handleClickImage = (image: any) => {
         setBoxCount(image.box_count)
@@ -54,15 +56,13 @@ function App() {
             } else {
                 const params = {
                     template_id: id,
-                    boxes: boxes.map(text => ({ text }))
+                    username: REACT_APP_USER,
+                    password: REACT_APP_PASSWORD,
+                    boxes: boxes.map(text => ({text}))
                 }
-                
-                const resp = await fetch(`${process.env.REACT_APP_URL}`, {
-                    method: 'POST',
-                    body: JSON.stringify(params),
-                })
-                const json = await resp.json()
-                setSelectedImage(json.data.url)
+
+                const resp = await axios.post(`${REACT_APP_URL}/getmeme`, params)
+                setSelectedImage(resp.data.data.url)
             }
 
         } catch (error) {
