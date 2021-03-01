@@ -5,7 +5,7 @@ export const Body = styled.div`
     height: 75vh;
     background-color: #fff;
     justify-content: center;
-    padding-top: 20px;
+    padding-top: 1em;
     padding-bottom: 20px;
     display: flex;
     border-radius: 10px;
@@ -14,6 +14,8 @@ export const Body = styled.div`
     align-items: center;
     overflow: auto;
     margin-top: 30px;
+    padding-left: 1em;
+    padding-right: 1em;
 `
 
 export const Templates = styled.div`
@@ -62,12 +64,12 @@ export const Button = styled.button`
 export const Header = styled.header`
     width: windowWidth;
     height: 12vh;
-    background-color: #836FFF;
+    background-color: #0078D4;
     box-shadow: 0 2px 5px gray;
     font-family: Impact;
     color: white;
     padding-left: 15vw;
-    font-size: 40px;
+    font-size: 2.5em;
     display: flex;
     align-items: center;
     text-shadow: 2px 2px 2px black;
@@ -75,7 +77,7 @@ export const Header = styled.header`
 
 export const Input = styled.input`
     width: 90%;
-    height: 30px;
+    height: 2em;
     border-radius: 7px;
     margin-bottom: 10px;
     text-align: center;

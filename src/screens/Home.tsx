@@ -57,7 +57,7 @@ function App() {
                     template_id: id,
                     username: REACT_APP_USER,
                     password: REACT_APP_PASSWORD,
-                    boxes: boxes.map(text => ({text}))
+                    boxes: boxes.map(text => ({ text }))
                 }
 
                 const resp = await axios.post(`${REACT_APP_URL}/getmeme`, params)
@@ -97,7 +97,9 @@ function App() {
                 <Body>
                     {selectedImage && (
                         <>
-                            <img src={selectedImage} width='auto' height='auto' alt='' />
+                            <p style={{ textAlign: 'center', marginBottom: '2.5em', fontSize: '1.2em' }}>Clique com botão direito do mouse e depois selecione <b>Salvar
+                                imagem como</b> para salvar a imagem em seu dispositivo.</p>
+                            <img src={selectedImage} width='300em' height='300em' alt='' style={{ marginBottom: '2em' }} />
                             <Button onClick={handleReset}>Criar novo meme</Button>
                         </>
                     )}
@@ -107,8 +109,8 @@ function App() {
                             <Templates>
                                 {meme.map((meme, index) => {
                                     return (
-                                        <button style={{ marginRight: '10px' }} onClick={() => handleClickImage(meme)} key={index}>
-                                            <img width='180vw' height='170vh' src={meme.url} alt={meme.name} />
+                                        <button style={{ marginRight: '10px', border: 'none', padding: 0 }} onClick={() => handleClickImage(meme)} key={index}>
+                                            <img width='150em' height='150em' src={meme.url} alt={meme.name} />
                                         </button>
                                     )
                                 })}
@@ -118,7 +120,8 @@ function App() {
                                     fontSize: '30px',
                                     position: 'relative',
                                     flex: 1,
-                                    textAlign: 'center'
+                                    textAlign: 'center',
+                                    marginTop: '0.4em'
                                 }}>Textos
                                 <div style={{
                                         fontSize: '0.7em'
@@ -127,7 +130,7 @@ function App() {
                                 {!boxCount && (
                                     <div style={{
                                         color: '#000',
-                                        fontSize: '150%',
+                                        fontSize: '1.2em',
                                         position: 'absolute'
                                     }}>Escolha uma imagem e crie seu texto</div>
                                 )}
