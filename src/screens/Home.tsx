@@ -87,7 +87,7 @@ function App() {
         }}>
             <Header>
                 Crie seu Meme
-                <img src={image} alt='Logo' width='80vw' height='80vh' />
+                <img src={image} alt='Logo' width='60vw' height='60vh' />
             </Header>
             <div style={{
                 alignItems: 'center',

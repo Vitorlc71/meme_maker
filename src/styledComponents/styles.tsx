@@ -63,13 +63,13 @@ export const Button = styled.button`
 
 export const Header = styled.header`
     width: windowWidth;
-    height: 12vh;
+    height: 10vh;
     background-color: #0078D4;
     box-shadow: 0 2px 5px gray;
     font-family: Impact;
     color: white;
-    padding-left: 15vw;
-    font-size: 2.5em;
+    padding-left: 14vw;
+    font-size: 1.8em;
     display: flex;
     align-items: center;
     text-shadow: 2px 2px 2px black;
