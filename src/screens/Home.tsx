@@ -130,9 +130,10 @@ function App() {
                                 {!boxCount && (
                                     <div style={{
                                         color: '#000',
-                                        fontSize: '1.2em',
-                                        position: 'absolute'
-                                    }}>Escolha uma imagem e crie seu texto</div>
+                                        fontSize: '1.1em',
+                                        position: 'absolute',
+                                        textAlign: 'center'
+                                    }}>Escolha uma imagem<div>e crie seu texto</div></div>
                                 )}
                                 {(new Array(boxCount).fill('').map((_, index) => (
                                     <Input
